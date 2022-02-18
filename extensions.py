@@ -27,9 +27,11 @@ class Convertor:
         except ValueError:
             raise APIException(f'Не удалось обработать количество {amount}!')
         
-        r = requests.get(f"https://api.exchangeratesapi.io/latest?base={base_key}&symbols={sym_key}")
+        access_key = '0fffbd1167776523be75'
+        r = requests.get(f"https://free.currconv.com/api/v7/convert?q={base_key}_{sym_key}&compact=ultra&apiKey={access_key}")
         resp = json.loads(r.content)
-        new_price = resp['rates'][sym_key] * amount
-        new_price = round(new_price, 3)
+        new_price = resp[f'{base_key}_{sym_key}'] * amount
+        new_price = round(new_price, 2)
+        
         message =  f"Цена {amount} {base} в {sym} : {new_price}"
         return message

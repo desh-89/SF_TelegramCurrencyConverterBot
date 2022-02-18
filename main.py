@@ -7,7 +7,7 @@ bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start', 'help'])
 def start(message: telebot.types.Message):
-    text = "Приветствие!\nСписок доступных валют: /values"
+    text = "Приветствие!"
     bot.send_message(message.chat.id, text)
 
 @bot.message_handler(commands=['values'])
